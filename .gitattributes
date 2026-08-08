@@ -1,0 +1,23 @@
+# Normalise line endings in the repository to LF, while letting Windows
+# checkouts keep CRLF locally. Without this, a clone on Linux or macOS sees
+# every file as modified.
+* text=auto eol=lf
+
+# Explicit for the source and docs.
+*.py    text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+
+# Binary — never touch, and keep them out of diffs.
+*.png   binary
+*.jpg   binary
+*.pptx  binary
+*.pdf   binary
+*.zip   binary
+
+# Generated; collapse in pull-request diffs.
+package-lock.json linguist-generated=true

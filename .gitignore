@@ -1,0 +1,39 @@
+# ---------------------------------------------------------------- generated
+# Everything in reports/ is reproduced by `python run_demo.py` in ~2 minutes,
+# so it is not tracked. The figures the README needs live in docs/images/,
+# which IS tracked.
+reports/
+
+# The deck is a build artefact of make_deck.js. Attach it to a release rather
+# than tracking a 1.4 MB binary that changes on every regeneration.
+*.pptx
+*.pdf
+
+# ---------------------------------------------------------------- python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------- node
+node_modules/
+
+# ---------------------------------------------------------------- local
+*.log
+out.txt
+err.txt
+files.zip
+extracted/
+
+# ---------------------------------------------------------------- os / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,14 @@
+{
+  "name": "cuas-layered-sensing",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Pitch deck generator for the layered C-UAS sensing analysis framework. Node is needed only for the deck; the analysis itself is pure Python.",
+  "license": "MIT",
+  "scripts": {
+    "deck": "node make_deck.js",
+    "qa": "python qa_deck.py CUAS_Layered_Sensing_Pitch.pptx"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
