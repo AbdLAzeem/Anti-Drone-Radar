@@ -93,7 +93,6 @@ Four layers, each a physical model rather than a fitted curve.
 └── docs/
     ├── ENGINEERING_NOTES.md   what changed from the prototype, and why
     ├── ROADMAP.md             next phase, with definitions of done
-    ├── project_brief.md       compact context brief
     └── images/                figures used by this README
 ```
 
