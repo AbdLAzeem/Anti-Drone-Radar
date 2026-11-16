@@ -228,7 +228,7 @@ function footer(s, n) {
     fontFace: B_FONT, fontSize: 15, bold: true, color: INK, margin: 0,
   });
   bullets(s, [
-    "Radar range grows only as the fourth root of SNR. Doubling range needs 12 dB — sixteen times the power-aperture product.",
+    "Radar range grows only as the fourth root of SNR. Doubling range needs 12 dB, sixteen times the power-aperture product.",
     "A boat-launched multirotor bypasses every land-side perimeter control the port has.",
     "Over water, sea-surface multipath can cost 20 dB in a null, so the honest coverage figure is worse than a free-space budget suggests.",
     "Birds outnumber drones. A system that cannot reject gulls gets switched off by its operators.",
@@ -246,7 +246,7 @@ function footer(s, n) {
     "What detection range is physically available, per sensor and per target?",
     "Which of those detections can be told apart from a bird?",
     "Can the track survive a manoeuvre well enough to be actioned?",
-    "Given candidate masts, where do sensors go — and what is still uncovered?",
+    "Given candidate masts, where do sensors go, and what is still uncovered?",
   ], { x: M + 6.9, y: 4.32, w: CW - 7.3, h: 2.2, size: 13, color: "D8E3EC", gap: 10 });
 
   footer(s, 2);
@@ -260,10 +260,10 @@ function footer(s, n) {
 // ================================================================ 3 architecture
 (() => {
   const s = lightSlide();
-  heading(s, "Architecture", "Four layers, each a physical model — not a fitted curve");
+  heading(s, "Architecture", "Four layers, each a physical model, not a fitted curve");
 
   const rows = [
-    [1, "Detection", "Noise-limited radar chain: SNR = PtG²λ²σF⁴n / ((4π)³R⁴kTsB·F·L). Detection probability from the exact square-law detector distribution — Marcum Q and Swerling — not assumed.", "cuas/radar.py\ncuas/propagation.py"],
+    [1, "Detection", "Noise-limited radar chain: SNR = PtG²λ²σF⁴n / ((4π)³R⁴kTsB·F·L). Detection probability from the exact square-law detector distribution, Marcum Q and Swerling, not assumed.", "cuas/radar.py\ncuas/propagation.py"],
     [2, "Classification", "Rotor return synthesised from distributed blade scatterers, then interpretable spectrogram features into an SVM. Cross-validated, with a speed-feature ablation.", "cuas/microdoppler.py\ncuas/classify.py"],
     [3, "Fusion", "Kalman and IMM estimators on a shared 6-state model, validated by position RMSE and NEES consistency over Monte-Carlo runs.", "cuas/tracking.py"],
     [4, "System", "Per-sensor Pd fused as 1 − Π(1 − Pdᵢ), mapped over a 2-D grid, then greedy maximum-coverage mast selection against asset stand-off rings.", "cuas/system.py\ncuas/scenarios.py"],
@@ -311,7 +311,7 @@ function footer(s, n) {
 // ================================================================ 4 layer 1
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 1 — detection", "The σ^(1/4) law drives the design", { tw: 8.6 });
+  heading(s, "Layer 1: detection", "The σ^(1/4) law drives the design", { tw: 8.6 });
   layerChip(s, 1, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(S, "range_vs_rcs.png"), x: M, y: 1.5, w: 7.6, h: 4.72 });
@@ -325,7 +325,7 @@ function footer(s, n) {
   });
   bullets(s, [
     "+12 dB two-way from 36 dBi aperture gain instead of 30 dBi",
-    "~8 dB from a 512-pulse dwell — a staring array does not spend its time rotating",
+    "~8 dB from a 512-pulse dwell: a staring array does not spend its time rotating",
     "Neither is exotic; both are ordinary design choices",
   ], { x: bx, y: 3.5, w: bw, h: 1.8, size: 12.5, gap: 9 });
 
@@ -365,7 +365,7 @@ function footer(s, n) {
   });
   bullets(s, [
     "Direct and sea-reflected rays interfere, producing a lobed vertical pattern: F enters SNR as F⁴, so +12 dB at a peak and −20 dB in a null.",
-    "Detection is therefore not monotonic in range — a target can be lost as it closes.",
+    "Detection is therefore not monotonic in range: a target can be lost as it closes.",
     "Surface roughness suppresses the coherent reflection, so sea state changes the lobe structure. Modelled via the Ament factor.",
     "Also included: ITU-R gaseous and rain attenuation, and the 4/3-Earth radar horizon that hard-limits geometry regardless of power.",
   ], { x: bx, y: 1.98, w: bw, h: 3.16, size: 12.5, gap: 10 });
@@ -374,7 +374,7 @@ function footer(s, n) {
     x: bx, y: 5.24, w: bw, h: 0.78,
     fill: { color: MIDNIGHT }, rectRadius: 0.06,
   });
-  s.addText("This was entirely absent from the first prototype — the largest single omission for a maritime study.", {
+  s.addText("This was entirely absent from the first prototype: it was the largest single omission for a maritime study.", {
     x: bx + 0.16, y: 5.24, w: bw - 0.32, h: 0.78,
     fontFace: B_FONT, fontSize: 11.5, color: "D8E3EC", valign: "middle", margin: 0,
   });
@@ -391,7 +391,7 @@ function footer(s, n) {
 // ================================================================ 6 signatures
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 2 — classification", "A rotor writes a signature a bird cannot", { tw: 8.8 });
+  heading(s, "Layer 2: classification", "A rotor writes a signature a bird cannot", { tw: 8.8 });
   layerChip(s, 2, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(S, "signatures.png"), x: M, y: 1.5, w: 8.5, h: 3.57 });
@@ -401,7 +401,7 @@ function footer(s, n) {
   bullets(s, [
     "Blades are modelled as distributed point scatterers, so the return has the real structure: body line, symmetric sidebands, periodic flashes.",
     "Blade-tip Doppler 4616 Hz analytic → 8320 Hz measured two-sided extent, 90% of theory.",
-    "Bird extent is 352 Hz — a 23x separation.",
+    "Bird extent is 352 Hz, a 23x separation.",
   ], { x: bx, y: 1.56, w: bw, h: 3.4, size: 12.5, gap: 10 });
 
   s.addShape(pptx.ShapeType.roundRect, {
@@ -428,7 +428,7 @@ function footer(s, n) {
 // ================================================================ 7 classifier
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 2 — measured performance", "0 % false alarms on birds, cross-validated", { tw: 9.0 });
+  heading(s, "Layer 2: measured performance", "0 % false alarms on birds, cross-validated", { tw: 9.0 });
   layerChip(s, 2, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(S, "..", "classifier.png"),
@@ -439,7 +439,7 @@ function footer(s, n) {
   statTile(s, M + 4.12, 5.36, 3.86, "0.9996",
     "UAS-vs-bird AUC on signature features alone", DEEP);
   statTile(s, M + 8.24, 5.36, 3.86, "100 %",
-    "Bird recall — not one bird called a UAS", GREEN);
+    "Bird recall, not one bird called a UAS", GREEN);
 
   footer(s, 7);
   s.addNotes(
@@ -455,7 +455,7 @@ function footer(s, n) {
 // ================================================================ 8 tracking
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 3 — fusion", "Useful tracks need honest uncertainty", { tw: 9.4 });
+  heading(s, "Layer 3: fusion", "Useful tracks need honest uncertainty", { tw: 9.4 });
   layerChip(s, 3, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(S, "tracking.png"), x: M, y: 1.5, w: 8.2, h: 3.23 });
@@ -467,7 +467,7 @@ function footer(s, n) {
     fontFace: B_FONT, fontSize: 15, bold: true, color: INK, margin: 0,
   });
   bullets(s, [
-    "A correctly tuned filter has mean NEES equal to the state dimension — here 6.",
+    "A correctly tuned filter has mean NEES equal to the state dimension, here 6.",
     "The single-model filter scores 107: it is ~18x over-confident during the turn.",
     "That gap, not the RMSE, is how real trackers lose targets: the gate is drawn far too small.",
     "The IMM scores 3.2 and stays consistent.",
@@ -503,7 +503,7 @@ function footer(s, n) {
 // ================================================================ 9 coverage
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 4 — the answer", "Can the port be covered? Three configurations", { tw: 11.4 });
+  heading(s, "Layer 4: the answer", "Can the port be covered? Three configurations", { tw: 11.4 });
   layerChip(s, 4, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(R, "coverage_comparison.png"),
@@ -511,9 +511,9 @@ function footer(s, n) {
 
   const rows = [
     [{ text: "Configuration", options: { bold: true } }, { text: "Sector covered at Pd ≥ 0.9", options: { bold: true } }, { text: "Gap area", options: { bold: true } }, { text: "Assets held", options: { bold: true } }],
-    ["A — existing surveillance radar, 1 site", "4.9 %", "436 km²", "2 / 4"],
-    ["B — dedicated C-UAS radar, 1 site", "30.3 %", "320 km²", "4 / 4"],
-    ["C — layered suite, 3 optimised sites", "54.5 %", "209 km²", "4 / 4"],
+    ["A: existing surveillance radar, 1 site", "4.9 %", "436 km²", "2 / 4"],
+    ["B: dedicated C-UAS radar, 1 site", "30.3 %", "320 km²", "4 / 4"],
+    ["C: layered suite, 3 optimised sites", "54.5 %", "209 km²", "4 / 4"],
   ];
   s.addTable(rows, {
     x: M, y: 5.7, w: 12.06,
@@ -535,7 +535,7 @@ function footer(s, n) {
 // ================================================================ 10 siting
 (() => {
   const s = lightSlide();
-  heading(s, "Layer 4 — siting", "Where the next sensor goes, and when to stop", { tw: 10.4 });
+  heading(s, "Layer 4: siting", "Where the next sensor goes, and when to stop", { tw: 10.4 });
   layerChip(s, 4, W - M - 0.5, 0.62);
 
   s.addImage({ path: path.join(S, "siting_gain.png"), x: M, y: 1.52, w: 7.5, h: 4.4 });
@@ -543,7 +543,7 @@ function footer(s, n) {
   const bx = M + 7.85;
   const bw = CW - 7.85;
   bullets(s, [
-    "Greedy maximum-coverage selection over 9 candidate masts, each carrying its own height — so the objective trades height (horizon, lobe structure) against position.",
+    "Greedy maximum-coverage selection over 9 candidate masts, each carrying its own height, so the objective trades height (horizon, lobe structure) against position.",
     "Marginal gain falls monotonically: +36.3, +9.3, +8.8, then +1.7, +1.7.",
     "Sites 4 and 5 add 1.7 points each. Three nodes is the value point, and the model says so rather than the vendor.",
     "Maximum coverage is submodular, so greedy carries the standard (1 − 1/e) ≈ 63 % approximation guarantee.",
@@ -559,7 +559,7 @@ function footer(s, n) {
     valign: "middle", margin: 0,
   });
 
-  caption(s, "Tie-break on minimum Pd over each asset's stand-off ring — a healthy sector average with one exposed asset is not an acceptable answer.", 6.28);
+  caption(s, "Tie-break on minimum Pd over each asset's stand-off ring: a healthy sector average with one exposed asset is not an acceptable answer.", 6.28);
   footer(s, 10);
   s.addNotes(
     "The commercial hook: this tells a customer how many sensors to buy and " +
@@ -575,10 +575,10 @@ function footer(s, n) {
 
   const rows = [
     [{ text: "What was wrong", options: { bold: true } }, { text: "Why it mattered", options: { bold: true } }, { text: "Fix", options: { bold: true } }],
-    ["Detection threshold was an assumed constant (Pmin = 10⁻¹³ W)", "No derivation — the range figure could not be defended", "Full receiver noise budget kTsB·F·L; Pd from the exact detector distribution"],
+    ["Detection threshold was an assumed constant (Pmin = 10⁻¹³ W)", "No derivation: the range figure could not be defended", "Full receiver noise budget kTsB·F·L; Pd from the exact detector distribution"],
     ["Micro-Doppler phase term short by 2π", "Spectrogram collapsed to static lines; no rotor signature at all", "Scatterer-based rotor model, validated against analytic tip Doppler"],
     ["bw_99 measured the noise floor at low SNR", "The key feature carried no information exactly where classification is hardest", "Robust median floor subtracted first"],
-    ["Modulation rate aliased above 130 Hz by the STFT hop", "Multirotor blade rates are 130–450 Hz — the feature was folding them", "Estimated from the full-rate amplitude envelope"],
+    ["Modulation rate aliased above 130 Hz by the STFT hop", "Multirotor blade rates are 130–450 Hz: the feature was folding them", "Estimated from the full-rate amplitude envelope"],
     ["No validation anywhere", "One track on one noise realisation proves nothing", "Monte-Carlo RMSE + NEES; cross-validated classification with ablation"],
   ];
   s.addTable(rows, {
@@ -680,7 +680,7 @@ function footer(s, n) {
   heading(s, "Roadmap", "Week 1 delivered. Weeks 2–3 carry the harder work");
 
   const cols = [
-    ["DELIVERED — WEEK 1", DEEP, [
+    ["DELIVERED: WEEK 1", DEEP, [
       "Noise-limited detection chain, exact Pd, Albersheim design inversion",
       "Maritime propagation: multipath, ITU-R attenuation, radar horizon",
       "Scatterer-based rotor and bird synthesis, validated against theory",
@@ -699,7 +699,7 @@ function footer(s, n) {
       "Literature positioning against published C-UAS coverage studies",
     ]],
     ["BEYOND", TEAL, [
-      "Validation against real radar recordings — the single biggest credibility gain available",
+      "Validation against real radar recordings, the single biggest credibility gain available",
       "Surveyed port geometry replacing the generic layout",
       "Cost model alongside coverage, so siting optimises value not just Pd",
       "Elevation / 3-D coverage volumes instead of a single altitude slice",

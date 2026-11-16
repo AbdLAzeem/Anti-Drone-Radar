@@ -129,7 +129,7 @@ def fig_multipath():
     # that corner is empty, and it stays clear of the lower-right legend.
     ax.text(0.02, 0.97,
             "Up to +12 dB at a lobe peak, -20 dB in a null.\n"
-            "Low-altitude detection is not monotonic in range —\n"
+            "Low-altitude detection is not monotonic in range:\n"
             "a free-space budget cannot represent this at all.",
             transform=ax.transAxes, fontsize=11, color=INK, va="top",
             bbox=dict(boxstyle="round,pad=0.5", fc="#FDF1E3", ec="none"))
@@ -157,8 +157,8 @@ def fig_signatures():
 
     fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6), sharey=True)
     titles = (
-        f"Quadcopter — rotor sidebands to $\\pm${tip:.0f} Hz",
-        "Bird — narrow body line only",
+        f"Quadcopter, rotor sidebands to $\\pm${tip:.0f} Hz",
+        "Bird, narrow body line only",
     )
     for ax, key, title in zip(axes, ("quad", "bird"), titles):
         t, f, sdb = specs[key]

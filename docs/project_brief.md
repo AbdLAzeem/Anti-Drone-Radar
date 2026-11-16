@@ -1,4 +1,4 @@
-# C-UAS Project — Resume Brief
+# C-UAS Project: Resume Brief
 
 > Load this file to continue. It carries the full context in compact form.
 > Last updated: 2026-08-03 (end of week 1).
@@ -13,30 +13,30 @@
   lab access. Demo delivered in week 1; weeks 2–3 plan in `docs/ROADMAP.md`.
 - **Assistant boundary (keep respecting)**: educational / simulation level.
   Generic textbook parameters, physics, math, thesis structure. NO operational
-  weapon specs — real jamming frequencies or waveforms, targeting or intercept
+  weapon specs: real jamming frequencies or waveforms, targeting or intercept
   timings, counter-countermeasure parameters. Those come from the supervisor /
   classified college labs. This boundary holds regardless of stated context;
   the artefact is what matters, not intent. It has not constrained the work:
   a sensing coverage study needs none of it.
 
-## Current state — this is no longer one script
+## Current state: this is no longer one script
 
 The original `cuas_sim.py` (7 KB, 4 equations) has been replaced by a package.
 
 ```
-cuas/radar.py         Layer 1 — noise budget, exact Pd (Marcum/Swerling),
+cuas/radar.py         Layer 1: noise budget, exact Pd (Marcum/Swerling),
                       Albersheim, range budgets, 2 radar presets
 cuas/propagation.py   Sea-surface two-ray multipath, ITU-R gas + rain
                       attenuation, 4/3-Earth horizon
-cuas/microdoppler.py  Layer 2 — scatterer-based rotor + bird synthesis,
+cuas/microdoppler.py  Layer 2: scatterer-based rotor + bird synthesis,
                       spectrogram features
-cuas/classify.py      Layer 2b — dataset, SVM, cross-validated ROC/confusion,
+cuas/classify.py      Layer 2b: dataset, SVM, cross-validated ROC/confusion,
                       speed-feature ablation, permutation importance
-cuas/tracking.py      Layer 3 — KF + IMM (CV/CA), RMSE + NEES, Monte-Carlo
-cuas/system.py        Layer 4 — physical per-sensor Pd, fusion, coverage maps,
+cuas/tracking.py      Layer 3: KF + IMM (CV/CA), RMSE + NEES, Monte-Carlo
+cuas/system.py        Layer 4: physical per-sensor Pd, fusion, coverage maps,
                       greedy siting
 cuas/scenarios.py     Port geometry, candidate masts, A/B/C comparison
-run_demo.py           Single entry point — 114 s, writes reports/
+run_demo.py           Single entry point, 114 s, writes reports/
 make_slide_figures.py Slide-sized figures
 make_deck.js          Pitch deck generator (pptxgenjs)
 qa_deck.py            Deck geometry checks + PowerPoint render export
@@ -50,7 +50,7 @@ CUAS_Layered_Sensing_Pitch.pptx    14-slide deck, speaker notes included
 
 | Layer | Result |
 |---|---|
-| 1 | Existing surveillance radar **2.95 km**; dedicated staring array **8.55 km**. The 2.89× costs **18.5 dB** — R ∝ SNR^(1/4). Closed form vs exact solve agree 1.2 %. |
+| 1 | Existing surveillance radar **2.95 km**; dedicated staring array **8.55 km**. The 2.89× costs **18.5 dB**: R ∝ SNR^(1/4). Closed form vs exact solve agree 1.2 %. |
 | 2 | **94.0 %** CV accuracy; **93.3 %** with the speed feature removed; UAS-vs-bird AUC **0.9996**; **0 %** bird false alarms at 98 % detection; bird recall **100 %**. |
 | 3 | KF-CV RMSE 4.57 m, mean NEES **106.8** vs target 6 → ~18× over-confident. IMM RMSE **2.94 m**, NEES **3.21**, consistent. |
 | 4 | Sector covered at Pd ≥ 0.9: **A** 4.9 % (2/4 assets), **B** 30.3 % (4/4), **C** 54.5 % (4/4, 3 sites). Marginal siting gains +36.3 → +9.3 → +8.8 → +1.7 → +1.7. |
@@ -78,7 +78,7 @@ those cells to 1.0, which is exact to well beyond double precision.
 
 ## Open limitation to lead with
 **Blade-passage rate is not measured as a physical quantity.** Two estimators
-were built and rejected rather than shipped — harmonic product spectrum (lands
+were built and rejected rather than shipped: harmonic product spectrum (lands
 on integer multiples) and Doppler-spectrum autocorrelation (right for 3-blade,
 ~2.7× off for 2-blade). The classifier uses an honestly-named descriptor,
 `env_mod_peak_hz`. This is roadmap item W1.
@@ -87,7 +87,7 @@ Other stated limits: synthetic data only; plausible not surveyed geometry;
 independence assumed in fusion; no clutter or data association; no ducting.
 
 ## Environment notes
-- Python **3.8.2** on Windows — the code uses `from __future__ import
+- Python **3.8.2** on Windows: the code uses `from __future__ import
   annotations` so PEP 604 style annotations work. Do not assume 3.10+.
 - `numpy 1.23.5`, `scipy 1.10.1`, `matplotlib 3.6.0`, `sklearn 1.2.2`.
 - No LibreOffice; **PowerPoint is installed**, so `qa_deck.py` exports slide
@@ -95,7 +95,7 @@ independence assumed in fusion; no clutter or data association; no ducting.
 - `pptxgenjs` installed locally via npm for the deck.
 
 ## To resume
-"Continue the C-UAS project — here is the brief" + attach this file
+"Continue the C-UAS project, here is the brief" + attach this file
 (`docs/project_brief.md`). Then pick
 an item from `docs/ROADMAP.md`; W1 (blade rate) and W6 (real data) carry the most
 weight.

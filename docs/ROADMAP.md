@@ -1,4 +1,4 @@
-# Development plan — weeks 2–3
+# Development plan: weeks 2–3
 
 Week 1 delivered a working, validated framework and a pitch. This is the
 plan for the harder work, written so each item has a **definition of done**
@@ -10,7 +10,7 @@ carry the most weight in front of a technical audience.
 
 ---
 
-## Week 2 — close the stated gaps
+## Week 2: close the stated gaps
 
 ### W1. Recover the blade-passage rate as a measured quantity
 **Priority: highest.** This is the one limitation named on the "stated
@@ -20,7 +20,7 @@ Week 1 built and rejected two estimators:
 
 | Attempt | Failure mode |
 |---|---|
-| Harmonic product spectrum on the envelope | Lands on integer multiples — 3× for the 2-blade rotor, 4× for the bird (classic HPS octave error) |
+| Harmonic product spectrum on the envelope | Lands on integer multiples: 3× for the 2-blade rotor, 4× for the bird (classic HPS octave error) |
 | Autocorrelation of the Doppler spectrum (HERM-line spacing) | Correct for a 3-blade rotor (230 Hz measured vs 225 Hz analytic) but off ~2.7× for 2-blade rotors |
 
 The 3-blade success and the 2-blade failure point at the cause: for a
@@ -36,7 +36,7 @@ the spectral line structure is not simply spaced at the blade rate. Work:
 
 **Done when:** estimated blade rate is within 10 % of analytic across
 `n_blades` ∈ {2,3,4} and rpm ∈ [3000, 9000], as a `pytest` case with a
-tolerance — not a printed number.
+tolerance, not a printed number.
 
 ---
 
@@ -99,7 +99,7 @@ replaced by test assertions.
 
 ---
 
-## Week 3 — extend the scenario
+## Week 3: extend the scenario
 
 ### W5. Multi-target and degraded-weather scenarios as first-class cases
 Currently weather is a command-line flag and there is one target.
@@ -127,12 +127,12 @@ every claim.
 Cheapest routes, in order of accessibility:
 
 1. Public micro-Doppler datasets (several university radar groups publish
-   drone/bird recordings) — feed them straight through
+   drone/bird recordings): feed them straight through
    `extract_features` and re-run the same cross-validation.
 2. A low-cost 24 GHz CW radar module against a hobby drone: enough to test
    the micro-Doppler chain end to end, even if the range budget is not
    comparable.
-3. Supervisor/company access to X-band recordings — the ideal, and the
+3. Supervisor/company access to X-band recordings: the ideal, and the
    specific ask on the closing slide.
 
 **Done when:** the confusion matrix is reported on real data alongside the
@@ -146,7 +146,7 @@ Needed for both the thesis and the pitch: the framework must be placed
 against published work.
 
 - Layered C-UAS coverage and sensor-placement studies.
-- Micro-Doppler UAS classification benchmarks — record their reported
+- Micro-Doppler UAS classification benchmarks: record their reported
   accuracies and, more importantly, their dataset sizes and whether they
   cross-validate.
 - Maritime propagation for low-altitude detection.
@@ -160,16 +160,16 @@ least two places where published results disagree with each other.
 
 Stated so scope does not drift:
 
-- **3-D / elevation coverage volumes** — a real gap, but it multiplies
+- **3-D / elevation coverage volumes**: a real gap, but it multiplies
   compute cost and every current conclusion holds at a fixed altitude slice.
-- **Cost modelling alongside coverage** — high commercial value, but it needs
+- **Cost modelling alongside coverage**: high commercial value, but it needs
   price inputs only the company has.
-- **Evaporation-duct propagation** — genuinely important over warm sea and
+- **Evaporation-duct propagation**: genuinely important over warm sea and
   genuinely hard; needs refractivity profile data.
-- **Bistatic / passive geometries** — favour low-RCS detection and would be a
+- **Bistatic / passive geometries**: favour low-RCS detection and would be a
   strong research contribution, but they are a new detection model, not an
   extension of this one.
-- **Any effector, jamming or intercept modelling** — outside the scope
+- **Any effector, jamming or intercept modelling**: outside the scope
   boundary held throughout, and not needed for a sensing coverage study.
 
 ---

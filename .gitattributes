@@ -12,7 +12,7 @@
 *.yaml  text eol=lf
 *.yml   text eol=lf
 
-# Binary — never touch, and keep them out of diffs.
+# Binary: never touch, and keep them out of diffs.
 *.png   binary
 *.jpg   binary
 *.pptx  binary

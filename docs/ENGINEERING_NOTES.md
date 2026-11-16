@@ -4,7 +4,7 @@ Design decisions, corrections and validation detail behind the framework.
 The front page is [../README.md](../README.md); this document is the record of
 *why* the code looks the way it does and what was found wrong along the way.
 
-**Scope boundary.** This package models *sensing* only — detection,
+**Scope boundary.** This package models *sensing* only: detection,
 classification and tracking performance. It contains no effector, jamming or
 intercept parameters, by design.
 
@@ -25,7 +25,7 @@ Pd     = ncx2.sf(threshold, 2N, 2N·SNR)          # Swerling 0, exact
 ```
 
 Cross-check on the current configuration: the closed-form range equation
-gives **2.99 km** at σ = 0.01 m², the exact Pd solve gives **2.94 km** — a 2 %
+gives **2.99 km** at σ = 0.01 m², the exact Pd solve gives **2.94 km**: a 2 %
 agreement that validates both paths.
 
 **2. The micro-Doppler model was physically wrong.**
@@ -39,7 +39,7 @@ s(t)     = Σ_b Σ_m w_m · flash(t) · exp(−j4πR_m,b(t)/λ)
 ```
 
 Validation: measured 99 %-energy Doppler extent **8320 Hz** against an
-analytic blade-tip Doppler of **4616 Hz** — 90 % of the expected 2× two-sided
+analytic blade-tip Doppler of **4616 Hz**: 90 % of the expected 2× two-sided
 spread, the shortfall being the 99 %-energy cut trimming the weakest tip
 returns. Bird extent is **352 Hz**, a **23.7×** separation.
 
@@ -50,7 +50,7 @@ both of which were suppressing real class separation:
   the width of the **noise floor** (the whole band) rather than the signal.
   A robust median floor is now subtracted first.
 - The modulation-rate feature was estimated from the spectrogram frame
-  sequence, whose hop rate (~260 Hz) **aliases** any rate above ~130 Hz — and
+  sequence, whose hop rate (~260 Hz) **aliases** any rate above ~130 Hz, and
   multirotor blade rates are 130–450 Hz. It is now taken from the full-rate
   amplitude envelope.
 
@@ -58,7 +58,7 @@ Fixing these moved cross-validated accuracy from 88 % to 94 % and the bird
 false-alarm rate at 95 % detection from 64 % to 0 %.
 
 **3. The layered Pd curves were hand-picked logistics.**
-Each sensor's Pd(r) is now derived from a stated mechanism — radar from the
+Each sensor's Pd(r) is now derived from a stated mechanism: radar from the
 full chain above, RF from a downlink link budget, EO/IR from an
 angular-resolution limit, acoustic from narrowband array processing against
 ambient. The acoustic model in particular required array gain and analysis
@@ -72,7 +72,7 @@ now runs Monte-Carlo and reports filter consistency (results table in
 
 The NEES column is the important one. A NEES of 107 against a target of 6
 means the single-model filter is roughly 18× over-confident during the
-manoeuvre — it reports a covariance far smaller than its actual error, which
+manoeuvre: it reports a covariance far smaller than its actual error, which
 is the standard mechanism by which real trackers lose targets. The IMM is
 consistent and cuts RMSE 36 %.
 
@@ -83,7 +83,7 @@ accuracy is reported anywhere.
 **5. Maritime propagation was absent entirely.**
 For a *port* study this was the largest omission. Sea-surface multipath
 produces a lobed vertical coverage pattern worth roughly **+12 dB at a lobe
-peak and −20 dB in a null** (two-way) — it makes low-altitude detection
+peak and −20 dB in a null** (two-way): it makes low-altitude detection
 non-monotonic in range. A free-space model cannot represent this, and it is
 the dominant effect for a low-flying target over water.
 
@@ -103,9 +103,9 @@ and could not run on the target platform.
   beyond the 4/3-Earth horizon. Not modelled.
 - **Blade-passage rate is not measured.** This one is worth stating plainly:
   no feature here recovers the blade rate as a physical quantity. Two
-  estimators were built and **rejected rather than shipped** —
+  estimators were built and **rejected rather than shipped**:
   a harmonic product spectrum (lands on integer multiples: 3× for a 2-blade
-  rotor, 4× for the bird — the classic HPS octave error) and
+  rotor, 4× for the bird, the classic HPS octave error) and
   autocorrelation of the Doppler spectrum for HERM-line spacing (correct for
   a 3-blade rotor, 230 Hz measured vs 225 Hz analytic, but off by ~2.7× for
   2-blade rotors). The classifier therefore uses an honestly-named
